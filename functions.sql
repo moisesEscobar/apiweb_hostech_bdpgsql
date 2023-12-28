@@ -4,7 +4,6 @@ CREATE OR REPLACE FUNCTION public.insert_into_payment_order_txn(p_status charact
 RETURNS json
 LANGUAGE plpgsql
 AS $function$
-DECLARE v_new_record payment_order_txn;
 DECLARE v_new_record_id INT;
 BEGIN
     -- Validar payment_type_id

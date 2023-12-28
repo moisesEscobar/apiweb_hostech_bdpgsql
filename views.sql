@@ -4,7 +4,7 @@ SELECT
     id,
     name,
     phone_number,
-    description,
+    address,
     type_user,
     created_at,
     updated_at,
@@ -109,7 +109,7 @@ SELECT
     created_at,
     updated_at,
     deleted_at
-FROM payment_order_txn
+FROM payment_order_txns
 WHERE deleted_at IS NULL;
 
 CREATE
