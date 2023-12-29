@@ -1,6 +1,6 @@
 
-DROP Function IF EXISTS insert_into_payment_order_txn;
-CREATE OR REPLACE FUNCTION public.insert_into_payment_order_txn(p_status character varying, p_amount double precision, p_user_id integer, p_payment_type_id integer, p_payment_order_id integer, p_supplier_customer_id integer)
+DROP Function IF EXISTS create_payment_order_txn;
+CREATE OR REPLACE FUNCTION public.create_payment_order_txn(p_status character varying, p_amount double precision, p_user_id integer, p_payment_type_id integer, p_payment_order_id integer, p_supplier_customer_id integer)
 RETURNS json
 LANGUAGE plpgsql
 AS $function$
