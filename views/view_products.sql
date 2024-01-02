@@ -21,6 +21,7 @@ SELECT
             )
     ) AS supplier_name,
     created_at,
-    updated_at
+    updated_at,
+    path_file
 FROM products prds
 WHERE (deleted_at IS NULL);

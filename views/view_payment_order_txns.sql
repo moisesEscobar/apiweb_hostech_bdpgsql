@@ -1,3 +1,4 @@
+
 CREATE
 OR REPLACE VIEW public.view_payment_order_txns AS
 SELECT
