@@ -1,5 +1,4 @@
-CREATE
-OR REPLACE VIEW public.view_products AS
+CREATE OR REPLACE VIEW public.view_products AS
 SELECT
     id,
     name,
@@ -22,6 +21,6 @@ SELECT
     ) AS supplier_name,
     created_at,
     updated_at,
-    path_file
+    path_file,description
 FROM products prds
 WHERE (deleted_at IS NULL);

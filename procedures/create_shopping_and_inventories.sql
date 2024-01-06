@@ -1,7 +1,6 @@
-CREATE OR REPLACE PROCEDURE public.create_shopping_and_inventories(
-	IN jsondetails json)
-LANGUAGE 'plpgsql'
-AS $BODY$
+CREATE PROCEDURE public.create_shopping_and_inventories(IN jsondetails json)
+    LANGUAGE plpgsql
+    AS $$
 DECLARE
     v_supplier_id INT;
 	v_first_product_id INT;
@@ -21,8 +20,8 @@ BEGIN
     SELECT supplier_customer_id INTO v_supplier_id FROM view_products WHERE id = v_first_product_id;
 	
     -- Crear la venta y obtener el ID
-    INSERT INTO shoppings (date_purchase,created_at,updated_at) VALUES (v_date_purchase,NOW(), NOW()) RETURNING id INTO v_shopping_id;
-
+    INSERT INTO shoppings (supplier_customer_id,date_purchase,created_at,updated_at) 
+		VALUES (v_supplier_id,v_date_purchase,NOW(), NOW()) RETURNING id INTO v_shopping_id;
 	
     -- Iterar sobre cada objeto en el arreglo de productos
     FOR v_product_details IN SELECT * FROM json_array_elements(v_product_details)
@@ -30,7 +29,7 @@ BEGIN
 		
 		-- Verificar si el product_id existe en la tabla 'view_products'
 		IF NOT EXISTS (SELECT 1 FROM view_products WHERE id = (v_product_details->>'product_id')::INT AND supplier_customer_id=v_supplier_id) THEN
-			RAISE EXCEPTION 'El producto % no existe con el proveedo con id %',(v_product_details->>'product_id')::INT,v_supplier_id;
+			RAISE EXCEPTION 'El producto % no existe con el proveedor con id %',(v_product_details->>'product_id')::INT,v_supplier_id;
 		END IF;
 		
 		SELECT COALESCE(price, 0) INTO v_unit_price FROM view_products WHERE id = (v_product_details->>'product_id')::INT;
@@ -46,6 +45,4 @@ BEGIN
 EXCEPTION
     WHEN others THEN RAISE;-- Manejo de errores
 END;
-$BODY$;
-ALTER PROCEDURE public.create_shopping_and_inventories(json)
-    OWNER TO postgres;
+$$;

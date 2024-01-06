@@ -1,5 +1,4 @@
-CREATE
-OR REPLACE VIEW public.view_users AS
+CREATE OR REPLACE VIEW public.view_users AS
 SELECT
     id,
     name,

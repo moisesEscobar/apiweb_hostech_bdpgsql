@@ -1,5 +1,4 @@
-CREATE
-OR REPLACE VIEW public.view_logs AS
+CREATE OR REPLACE VIEW public.view_logs AS
 SELECT
     lv.id,
     lv.action,
@@ -13,6 +12,6 @@ SELECT
     lv.created_at,
     lv.updated_at
 FROM logs lv
-    JOIN users u ON lv.user_id = u.id
+    JOIN view_users u ON lv.user_id = u.id
 WHERE lv.deleted_at IS NULL
 ORDER BY lv.id DESC;

@@ -10,6 +10,7 @@ CREATE TABLE products(
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
     deleted_at timestamp with time zone,
+    path_file varchar(255),
     PRIMARY KEY(id)
 );
 CREATE INDEX idx_products_brand_id ON "products" USING btree ("brand_id");

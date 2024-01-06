@@ -1,17 +1,7 @@
-CREATE
-OR REPLACE VIEW public.view_product_sales AS
-SELECT
-    ps.id,
-    ps.product_id,
-    vp.name,
-    vp.sku,
-    vp.brand_name,
-    ps.quantity AS quantity_sold,
-    ps.total_amount,
-    ps.created_at,
-    ps.updated_at
-FROM (
-        product_sales ps
-        JOIN view_products vp ON ( (ps.product_id = vp.id))
-    )
-WHERE (ps.deleted_at IS NULL);
+CREATE OR REPLACE VIEW public.view_product_sales AS
+SELECT 
+	ps.*,
+	COALESCE(quantity_sold, 0) quantity_sold,
+	COALESCE(total_amount, 0) total_amount
+FROM product_sales ps
+LEFT JOIN view_product_sale_details_by_sale vpst ON ps.id=vpst.product_sale_id

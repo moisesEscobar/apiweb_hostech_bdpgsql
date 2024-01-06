@@ -1,5 +1,4 @@
-CREATE
-OR REPLACE VIEW public.view_suppliers AS
+CREATE OR REPLACE VIEW public.view_suppliers AS
 SELECT
     id,
     name,

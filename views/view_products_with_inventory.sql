@@ -15,8 +15,8 @@ SELECT
         vir.total_quantity - vir.quantity_sold
     ) AS quantity_available,
     COALESCE(
-        vir.total_amount, (0) :: double precision
-    ) AS total_amount
+        vir.total_amount_sold, (0) :: double precision
+    ) AS total_amount_sold
 FROM (
         view_products vp
         JOIN view_inventory_resume vir ON ( (vp.id = vir.product_id))
