@@ -8,4 +8,4 @@ SELECT
         0 :: double precision
     ) AS total_amount_sold
 FROM view_inventories_by_product ip
-LEFT JOIN product_sale_details_by_product ips ON ip.product_id = ips.product_id;
+LEFT JOIN view_product_sale_details_by_product ips ON ip.product_id = ips.product_id;
